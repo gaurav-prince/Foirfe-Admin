@@ -1,12 +1,15 @@
 <!-- <p>{{text}}</p> -->
 <div class="button-section col-offset-4 submit-button">
-<button mat-raised-button color="primary" matTooltip="Save Draft"  (click)="onSave()" [disabled]="saveDisabled">Save</button>
-<button mat-raised-button color="primary" matTooltip="Publish" (click)="onPublish()" [disabled]="publishDisabled">Publish</button>
-<!-- <button mat-raised-button color="primary" matTooltip="Delete the post" (click)="onDelete()" [disabled]="deleteDisabled">Clear All</button> -->
+    <button mat-raised-button matTooltip="Save Draft" (click)="onSave()" [disabled]="saveDisabled">Save</button>
+    <button mat-raised-button matTooltip="Publish" (click)="onPublish()" [disabled]="publishDisabled">Publish</button>
+    <!-- <button mat-raised-button color="primary" matTooltip="Delete the post" (click)="onDelete()" [disabled]="deleteDisabled">Clear All</button> -->
 </div>
+
+<div class="snackbar" [class.show]="snackbarVisible">{{snackbarText}}</div>
+
 <div class="title-section">
     <input matInput placeholder="Title..." type="text" [(ngModel)]="title">
 </div>
 <div class="editor-section">
-<quill-editor (onContentChanged)="onTextChange($event)"></quill-editor>
+    <quill-editor (onContentChanged)="onTextChange($event)"></quill-editor>
 </div>
