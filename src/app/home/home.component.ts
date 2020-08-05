@@ -20,27 +20,35 @@ export class HomeComponent implements OnInit {
   publishDisabled: boolean = true;
   deleteDisabled: boolean = true;
   postId: string = null;
-  snackbarVisible:boolean=false;
-  snackbarText:string='';
+  snackbarVisible: boolean = false;
+  snackbarText: string = '';
+  thumbnail: any = null;
+  category: string = '';
 
   ngOnInit(): void {
   }
 
   openSnackBar(message: string) {
-    this.snackbarText=message;
-    this.snackbarVisible=true;
-    setTimeout(function(){ 
-    this.snackbarVisible=false;
-    this.snackbarText='';
-     }, 3000);
-    this.snackbarVisible=false;
+    this.snackbarText = message;
+    this.snackbarVisible = true;
+    setTimeout(function () {
+      this.snackbarVisible = false;
+      this.snackbarText = '';
+    }, 3000);
+    this.snackbarVisible = false;
+  }
+
+  upload(files: File[]): void {
+    console.log(files);
   }
 
   onSave(): void {
     let tempData = {
       title: this.title,
       htmltext: this.htmlText,
-      publishedState: false
+      publishedState: false,
+      category:this.category,
+      timestamp: new Date().toLocaleString()
     };
     if (this.postId) {
       this.db.list('postContents').update(this.postId, tempData);
@@ -57,7 +65,9 @@ export class HomeComponent implements OnInit {
     let tempData = {
       title: this.title,
       htmltext: this.htmlText,
-      publishedState: true
+      publishedState: true,
+      category:this.category,
+      timestamp: new Date().toLocaleString()
     };
     if (this.postId) {
       this.db.list('postContents').update(this.postId, tempData);

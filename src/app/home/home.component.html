@@ -10,6 +10,21 @@
 <div class="title-section">
     <input matInput placeholder="Title..." type="text" [(ngModel)]="title">
 </div>
+<div class="image-section">
+    <span class="col-md-6">
+        Category:
+        <select name="category" [(ngModel)]="category">
+            <option value="process">Process</option>
+            <option value="product">Product</option>
+            <option value="training">Training</option>
+            <option value="support">Support</option>
+        </select>
+    </span>
+    <span class="col-md-6">
+        Select Thumbnail:
+        <input type="file" (change)="upload($event.target.files)">
+    </span>
+</div>
 <div class="editor-section">
     <quill-editor (onContentChanged)="onTextChange($event)"></quill-editor>
 </div>
