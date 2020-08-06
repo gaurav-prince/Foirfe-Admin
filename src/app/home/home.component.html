@@ -1,12 +1,30 @@
 <!-- <p>{{text}}</p> -->
 <div class="button-section col-offset-4 submit-button">
-<button mat-raised-button color="primary" matTooltip="Save Draft"  (click)="onSave()" [disabled]="saveDisabled">Save</button>
-<button mat-raised-button color="primary" matTooltip="Publish" (click)="onPublish()" [disabled]="publishDisabled">Publish</button>
-<!-- <button mat-raised-button color="primary" matTooltip="Delete the post" (click)="onDelete()" [disabled]="deleteDisabled">Clear All</button> -->
+    <button mat-raised-button matTooltip="Save Draft" (click)="onSave()" [disabled]="saveDisabled">Save</button>
+    <button mat-raised-button matTooltip="Publish" (click)="onPublish()" [disabled]="publishDisabled">Publish</button>
+    <!-- <button mat-raised-button color="primary" matTooltip="Delete the post" (click)="onDelete()" [disabled]="deleteDisabled">Clear All</button> -->
 </div>
+
+<div class="snackbar" [class.show]="snackbarVisible">{{snackbarText}}</div>
+
 <div class="title-section">
     <input matInput placeholder="Title..." type="text" [(ngModel)]="title">
 </div>
+<div class="image-section">
+    <span class="col-md-6">
+        Category:
+        <select name="category" [(ngModel)]="category">
+            <option value="process">Process</option>
+            <option value="product">Product</option>
+            <option value="training">Training</option>
+            <option value="support">Support</option>
+        </select>
+    </span>
+    <span class="col-md-6">
+        Select Thumbnail:
+        <input type="file" (change)="upload($event.target.files)">
+    </span>
+</div>
 <div class="editor-section">
-<quill-editor (onContentChanged)="onTextChange($event)"></quill-editor>
+    <quill-editor (onContentChanged)="onTextChange($event)"></quill-editor>
 </div>

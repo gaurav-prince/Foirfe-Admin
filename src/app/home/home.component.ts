@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +9,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public db: AngularFireDatabase, private snackBar: MatSnackBar) {
+  constructor(public db: AngularFireDatabase) {
     // this.items = db.list('items').valueChanges();
   }
 
@@ -21,21 +20,35 @@ export class HomeComponent implements OnInit {
   publishDisabled: boolean = true;
   deleteDisabled: boolean = true;
   postId: string = null;
+  snackbarVisible: boolean = false;
+  snackbarText: string = '';
+  thumbnail: any = null;
+  category: string = '';
 
   ngOnInit(): void {
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
+  openSnackBar(message: string) {
+    this.snackbarText = message;
+    this.snackbarVisible = true;
+    setTimeout(function () {
+      this.snackbarVisible = false;
+      this.snackbarText = '';
+    }, 3000);
+    this.snackbarVisible = false;
+  }
+
+  upload(files: File[]): void {
+    console.log(files);
   }
 
   onSave(): void {
     let tempData = {
       title: this.title,
       htmltext: this.htmlText,
-      publishedState: false
+      publishedState: false,
+      category:this.category,
+      timestamp: new Date().toLocaleString()
     };
     if (this.postId) {
       this.db.list('postContents').update(this.postId, tempData);
@@ -45,14 +58,16 @@ export class HomeComponent implements OnInit {
       this.postId = postRef.path.pieces_[1];
     }
     this.saveDisabled = true;
-    this.openSnackBar("Post Saved Successfully",null)
+    // this.openSnackBar("Post Saved Successfully")
   }
 
   onPublish(): void {
     let tempData = {
       title: this.title,
       htmltext: this.htmlText,
-      publishedState: true
+      publishedState: true,
+      category:this.category,
+      timestamp: new Date().toLocaleString()
     };
     if (this.postId) {
       this.db.list('postContents').update(this.postId, tempData);
@@ -61,7 +76,7 @@ export class HomeComponent implements OnInit {
       this.db.list('postContents').push(tempData);
     }
     this.publishDisabled = true;
-    this.openSnackBar("Post Published Successfully",null)
+    // this.openSnackBar("Post Published Successfully")
   }
 
   onDelete(): void {
