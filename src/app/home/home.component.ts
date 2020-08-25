@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message,'', {
+    this._snackBar.open(message,'OK', {
       duration: 3000,
       panelClass: 'snackbar',
       horizontalPosition: this.horizontalPosition,

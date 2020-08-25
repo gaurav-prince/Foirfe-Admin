@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contents',
   templateUrl: './contents.component.html',
-  styleUrls: ['./contents.component.scss']
+  styleUrls: ['./contents.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ContentsComponent implements OnInit {
   resourcesPosts: any;
   latestPost: any;
   showBusy: boolean = true;
-  constructor(public db: AngularFireDatabase) { }
+  constructor(public db: AngularFireDatabase, private _snackBar: MatSnackBar) { }
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   ngOnInit(): void {
     this.getResourcesPosts();
   }
@@ -31,6 +39,15 @@ export class ContentsComponent implements OnInit {
     });
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message,'OK', {
+      duration: 60000,
+      panelClass: 'snackbar',
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
   deletePost(key): void {
     // this
 
@@ -39,5 +56,6 @@ export class ContentsComponent implements OnInit {
 
     let post = this.db.object('postContents/' + key);
     post.remove();
+    this.openSnackBar("Post Deleted Successfully")
   }
 }
