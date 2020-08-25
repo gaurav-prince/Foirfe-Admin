@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public db: AngularFireDatabase) {
+  constructor(public db: AngularFireDatabase,private _snackBar: MatSnackBar) {
     // this.items = db.list('items').valueChanges();
   }
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   text: string = '';
   htmlText: string = '';
   title: string = '';
@@ -29,13 +37,12 @@ export class HomeComponent implements OnInit {
   }
 
   openSnackBar(message: string) {
-    this.snackbarText = message;
-    this.snackbarVisible = true;
-    setTimeout(function () {
-      this.snackbarVisible = false;
-      this.snackbarText = '';
-    }, 3000);
-    this.snackbarVisible = false;
+    this._snackBar.open(message,'', {
+      duration: 3000,
+      panelClass: 'snackbar',
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
   upload(files: File[]): void {
@@ -45,6 +52,7 @@ export class HomeComponent implements OnInit {
   onSave(): void {
     let tempData = {
       title: this.title,
+      text:this.text,
       htmltext: this.htmlText,
       publishedState: false,
       category:this.category,
@@ -58,12 +66,13 @@ export class HomeComponent implements OnInit {
       this.postId = postRef.path.pieces_[1];
     }
     this.saveDisabled = true;
-    // this.openSnackBar("Post Saved Successfully")
+    this.openSnackBar("Post Saved Successfully")
   }
 
   onPublish(): void {
     let tempData = {
       title: this.title,
+      text:this.text,
       htmltext: this.htmlText,
       publishedState: true,
       category:this.category,
@@ -76,7 +85,7 @@ export class HomeComponent implements OnInit {
       this.db.list('postContents').push(tempData);
     }
     this.publishDisabled = true;
-    // this.openSnackBar("Post Published Successfully")
+    this.openSnackBar("Post Published Successfully")
   }
 
   onDelete(): void {
