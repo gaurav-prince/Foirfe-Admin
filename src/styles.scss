@@ -7,7 +7,7 @@ body {
 
 body {
     margin     : 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family        : "Avenir", sans-serif;
 }
 
 .toolbar-padding {
@@ -23,4 +23,9 @@ a.ff-link:hover {
 
 .white-text {
     color: #fff;
+}
+
+.cdk-visually-hidden {
+    display: none !important;
+    visibility: hidden !important;
 }
