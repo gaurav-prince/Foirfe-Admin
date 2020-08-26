@@ -34,7 +34,14 @@ export class ContentsComponent implements OnInit {
       )
     ).subscribe(resources => {
       this.showBusy = false;
-      // this.latestPost = resources.pop();
+      resources.sort(function (a: any, b: any) {
+        if (a.timestamp < b.timestamp)
+          return 1;
+        else if (a.timestamp > b.timestamp)
+          return -1;
+        else
+          return 0;
+      });
       this.resourcesPosts = resources;
     });
   }
