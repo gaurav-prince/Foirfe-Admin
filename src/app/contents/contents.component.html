@@ -16,8 +16,8 @@
             <td>{{resource.title}}</td>
             <td>{{resource.text}}</td>
             <td>
-                <button mat-raised-button color="primary" routerLink = "" [queryParams]= "{id : resource.key}">Edit</button>
-                <button color="danger" (click)="deletePost(resource.key)">Delete</button>
+                <button mat-raised-button color="primary" class = "edit" routerLink = "" [queryParams]= "{id : resource.key}">Edit</button><br/><br/>
+                <button color="danger" class = "delete"  (click)="deletePost(resource.key)">Delete</button>
             </td>
           </tr>
         </tbody>

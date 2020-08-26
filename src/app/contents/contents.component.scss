@@ -17,3 +17,27 @@
   margin-right: 1rem !important;
   max-width: 98%;
 }
+
+.edit {
+  background-color: #2d79db;
+  color: white;
+  width: 6rem;
+}
+
+.edit:hover {
+  background-color: #2367be;
+  color: white;
+  width: 6rem;
+}
+
+.delete:hover {
+  background-color: #dc3545;
+  color: white;
+  width: 6rem;
+}
+
+.delete {
+  background-color: #d9534f;
+  color: white;
+  width: 6rem;
+}
