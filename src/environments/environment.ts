@@ -5,13 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyCm7APG4m4-o37E9rq6kZKl1J_TumIxSUw",
-    authDomain: "foirfe-d2e91.firebaseapp.com",
-    databaseURL: "https://foirfe-d2e91.firebaseio.com",
-    projectId: "foirfe-d2e91",
-    storageBucket: "foirfe-d2e91.appspot.com",
-    messagingSenderId: "864191751808",
-    appId: "1:864191751808:web:40c823000c5449307f6865"
+    apiKey: "AIzaSyDEROxbwYEVT8aa4duyUfg0QOg5sJdJt_U",
+    authDomain: "foirfe-web.firebaseapp.com",
+    databaseURL: "https://foirfe-web.firebaseio.com",
+    projectId: "foirfe-web",
+    storageBucket: "foirfe-web.appspot.com",
+    messagingSenderId: "1045569189106",
+    appId: "1:1045569189106:web:0b6147b8903c9897354c6b",
+    measurementId: "G-VE7XRJ9LW5"
   }
 };
 
