@@ -65,4 +65,14 @@ export class ContentsComponent implements OnInit {
     post.remove();
     this.openSnackBar("Post Deleted Successfully")
   }
+
+  // editPost(key): void {
+  //   // this
+
+  //   // var updates = {};
+  //   // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+  //   let post = this.db.object('postContents/' + key);
+  //   this.openSnackBar("Post Deleted Successfully")
+  // }
 }

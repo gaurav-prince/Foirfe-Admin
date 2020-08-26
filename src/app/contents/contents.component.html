@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <table class="table" width="100%">
         <thead class="thead-dark">
           <tr>
@@ -16,7 +16,7 @@
             <td>{{resource.title}}</td>
             <td>{{resource.text}}</td>
             <td>
-                <!-- <button mat-raised-button color="primary">Edit</button> -->
+                <button mat-raised-button color="primary" routerLink = "" [queryParams]= "{id : resource.key}">Edit</button>
                 <button color="danger" (click)="deletePost(resource.key)">Delete</button>
             </td>
           </tr>
